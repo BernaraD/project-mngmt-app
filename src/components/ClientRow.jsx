@@ -3,6 +3,7 @@ import { FaTrash } from "react-icons/fa";
 import { DELETE_CLIENT } from '../mutations/clientMutations';
 import { useMutation } from "@apollo/client";
 import { GET_CLIENTS } from "../queries/clientQueries";
+import { GET_PROJECTS } from "../queries/projectQueries";
 
 
 function ClientRow({ client }) {
@@ -17,7 +18,8 @@ function ClientRow({ client }) {
     const [deleteClient] = useMutation(DELETE_CLIENT, {
     //1.
         variables: { id: client.id },
-        refetchQueries: [{ query: GET_CLIENTS }],
+        //after deleting the user, we want to delete all his projects
+        refetchQueries: [{ query: GET_CLIENTS}, {query: GET_PROJECTS}],
 
     //2. Second way to delete:
 

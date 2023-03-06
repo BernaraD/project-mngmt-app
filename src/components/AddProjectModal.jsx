@@ -76,7 +76,7 @@ function AddClientModal() {
                                             aria-label="Close"></button>
                                 </div>
                                 <div className="modal-body">
-                                    <form action="" onSubmit={ onSubmit }>
+                                    <form onSubmit={ onSubmit }>
 
                                         <div className="mb-3">
                                             <label className="form-label">Name</label>

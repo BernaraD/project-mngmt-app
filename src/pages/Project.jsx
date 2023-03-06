@@ -4,17 +4,17 @@ import { Link, useParams } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { GET_PROJECT } from "../queries/projectQueries";
 import ClientInfo from "./ClientInfo";
+import DeleteProjectBtn from "../components/DeleteProjectBtn";
+import EditProjectForm from "../components/EditProjectForm";
 
 
 function Project() {
 
-    //Get id from the URL
+    //Get id from the URL using useParams() hook
     const { id } = useParams();
     const { data, loading, error } = useQuery( GET_PROJECT, {
         variables: { id }
     } );
-
-    console.log( data )
 
     if (loading) return <Spinner/>;
     if (error) return <p>Something went wrong</p>
@@ -32,8 +32,17 @@ function Project() {
 
                     <h5 className="mt-3">Project Status</h5>
                     <p className='lead'>{ data.project.status }</p>
+
                     <hr/>
+
                     <ClientInfo client={data.project.client}/>
+
+
+                        <EditProjectForm project={data.project}/>
+                        <DeleteProjectBtn projectId={data.project.id}/>
+
+
+
                 </div>
 
             ) }
